@@ -18,7 +18,7 @@ months = dataframe["Date"].count()
 netprof_loss = dataframe[sales].sum()
 
 #Calculate the changes in "Profit/Losses" over entire period, and find the average for the changes
-changeavg = dataframe[sales].diff().mean()
+changeavg = round(dataframe[sales].diff().mean(),2)
 
 #The greatest increase in profits (date and amount) over the entire period
 maxsales = dataframe[sales].diff().max()
