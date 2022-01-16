@@ -1,6 +1,6 @@
 #Modules
 import os
-import csv
+#import csv <--- originally was going to output the results to a csv file, but re-read the instructions and saw it should be a .txt file
 import pandas as pd
 
 sales = "Profit/Losses"
@@ -16,8 +16,9 @@ months = dataframe["Date"].count()
 #The net total amount of "Profit/Losses"
 netprof_loss = dataframe[sales].sum()
 #Calculate the changes in "Profit/Losses" over entire period, and find the average for the changes
-changeavg = dataframe[sales].diff().mean()
-#print(changeavg)
+changeavg = dataframe[sales].diff().mean()#.astype(int)
+#rchangeavg = int(changeavg).round(2)
+#print(rchangeavg)
 #The greatest increase in profits (date and amount) over the entire period
 maxsales = dataframe[sales].diff().max()
 maxdate = dataframe[sales].max()
@@ -53,3 +54,6 @@ with open(txtpath, "w") as txtfile:
     txtfile.write(f"Average Change: {changeavg}" +"\n")
     txtfile.write(f"Greatest Increase in Profits: {maxdateloc} (${maxsales})" + "\n")
     txtfile.write(f"Greatest Decrease in Profits: {mindateloc} (${minsales})" + "\n")
+
+#added notes: Since my 'min' and 'max' is giving the min and max of the change I ran another line for each getting the min and max without the change to give me 
+#the correct dates that were shown in the example.
