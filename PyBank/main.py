@@ -1,8 +1,8 @@
 #Modules
 import os
-#import csv <--- originally was going to output the results to a csv file, but re-read the instructions and saw it should be a .txt file
 import pandas as pd
 
+#got tired of typing out "Profit/Losses"
 sales = "Profit/Losses"
 
 #Set our path
@@ -13,27 +13,26 @@ dataframe = pd.read_csv(bdcsvpath, usecols=headers)
 
 #The total number of months included in the dataset 
 months = dataframe["Date"].count()
+
 #The net total amount of "Profit/Losses"
 netprof_loss = dataframe[sales].sum()
+
 #Calculate the changes in "Profit/Losses" over entire period, and find the average for the changes
-changeavg = dataframe[sales].diff().mean()#.astype(int)
-#rchangeavg = int(changeavg).round(2)
-#print(rchangeavg)
+changeavg = dataframe[sales].diff().mean()
+
 #The greatest increase in profits (date and amount) over the entire period
 maxsales = dataframe[sales].diff().max()
 maxdate = dataframe[sales].max()
-#DATE and amount
+#Used this to locate the greatest increase in the data
 maxdate = dataframe.loc[dataframe[sales] == maxdate, "Date"]
 maxdateloc = maxdate.iloc[0]
-#print(maxdateloc)
+
 #The greatest decrease in profits (date and amount) over the entire period
-#Added min sales to get the Profit/Losses greatest decrease
 minsales = dataframe[sales].diff().min()
 mindate = dataframe[sales].min()
+#Used this to find the location of the greatest decrease date
 mindate = dataframe.loc[dataframe[sales] == mindate, "Date"]
 mindateloc = mindate.iloc[0]
-#print(mindateloc)
-#print(maxsales)
 
 #Printing out the results in my terminal
 print("Financial Analysis" + "\n")

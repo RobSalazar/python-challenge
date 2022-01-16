@@ -7,16 +7,12 @@ pollpath = os.path.join("resources", "election_data.csv")
 headers = ["Voter ID" , "County" , "Candidate"]
 
 df = pd.read_csv(pollpath, usecols=headers)
-#groupeddf = df.groupby(["Candidate", df.index]).agg({"Candidate","Sum"})
-#print(groupeddf)<---- maybe would of worked if i made a new column giving each candidate a summing amount of times their name came up
 
 #The total number of votes cast (Voter ids shouldnt repeat so i figured unique was unnecessary)
 totvotes = df["Voter ID"].count()
-#print(totvotes) <---making sure this is working along the way
 
 #A complete list of candidates who received votes
 candlist = df["Candidate"].unique()
-#print(candlist[0])
 
 #The percentage of votes each candidate won
 candcount = df["Candidate"].value_counts().astype(int)
@@ -29,15 +25,12 @@ rli = liperc.round(2)
 otooleyperc = (candcount[3]/totvotes)*100
 rotoo = otooleyperc.round(2)
 
-#print(rkhan) 
-
 #The total number of votes each candidate won
 khantot = candcount[0]
 cortot = candcount[1]
 litot = candcount[2]
 otootot = candcount[3]
 
-#print(khantot)
 #The winner of the election based on popular vote.
 winneramt = candcount.max()
 khan = candlist[0]
